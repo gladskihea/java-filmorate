@@ -30,6 +30,7 @@ public class UserService {
     }
 
     public User update(User user) {
+        userStorage.getById(user.getId());
         validateName(user);
         return userStorage.update(user);
     }
@@ -41,6 +42,8 @@ public class UserService {
     }
 
     public void removeFriend(Long userId, Long friendId) {
+        userStorage.getById(userId);
+        userStorage.getById(friendId);
         jdbcTemplate.update(SQL_DELETE_FRIEND, userId, friendId);
     }
 
@@ -50,6 +53,8 @@ public class UserService {
     }
 
     public List<User> getCommonFriends(Long id, Long otherId) {
+        userStorage.getById(id);
+        userStorage.getById(otherId);
         return jdbcTemplate.query(SQL_GET_COMMON_FRIENDS, userMapper, id, otherId);
     }
 
