@@ -19,8 +19,7 @@ public class ErrorHandler {
     public Map<String, String> handleNotFound(final NotFoundException e) {
         return Map.of("error", e.getMessage() != null ? e.getMessage() : "Not found");
     }
-
-    // ХИТРОСТЬ: если в БД сохраняем фильм с id жанра/mpa, которого нет, летит эта ошибка
+    
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handleDataIntegrityViolation(final DataIntegrityViolationException e) {
