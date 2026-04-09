@@ -9,6 +9,7 @@ import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
 import ru.yandex.practicum.filmorate.storage.InMemoryUserStorage;
 import ru.yandex.practicum.filmorate.storage.UserStorage;
+import ru.yandex.practicum.filmorate.mapper.UserMapper;
 
 import java.time.LocalDate;
 
@@ -22,10 +23,11 @@ class UserControllerTest {
     @BeforeEach
     void setUp() {
         UserStorage userStorage = new InMemoryUserStorage();
-
         JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
 
-        UserService userService = new UserService(userStorage, jdbcTemplate);
+        UserMapper userMapper = new UserMapper();
+
+        UserService userService = new UserService(userStorage, jdbcTemplate, userMapper);
 
         controller = new UserController(userStorage, userService);
     }
