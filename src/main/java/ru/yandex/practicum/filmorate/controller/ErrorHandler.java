@@ -19,7 +19,7 @@ public class ErrorHandler {
     public Map<String, String> handleNotFound(final NotFoundException e) {
         return Map.of("error", e.getMessage() != null ? e.getMessage() : "Not found");
     }
-    
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handleDataIntegrityViolation(final DataIntegrityViolationException e) {
