@@ -16,26 +16,42 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> findAll() { return userStorage.findAll(); }
+    public List<User> findAll() {
+        return userStorage.findAll();
+    }
 
     @PostMapping
-    public User create(@RequestBody User user) { return userStorage.create(user); }
+    public User create(@RequestBody User user) {
+        return userStorage.create(user);
+    }
 
     @PutMapping
-    public User update(@RequestBody User user) { return userStorage.update(user); }
+    public User update(@RequestBody User user) {
+        return userStorage.update(user);
+    }
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable Long id) { return userStorage.getById(id); }
+    public User getById(@PathVariable Long id) {
+        return userStorage.getById(id);
+    }
 
     @PutMapping("/{id}/friends/{friendId}")
-    public void addFriend(@PathVariable Long id, @PathVariable Long friendId) { userService.addFriend(id, friendId); }
+    public void addFriend(@PathVariable Long id, @PathVariable Long friendId) {
+        userService.addFriend(id, friendId);
+    }
 
     @DeleteMapping("/{id}/friends/{friendId}")
-    public void removeFriend(@PathVariable Long id, @PathVariable Long friendId) { userService.removeFriend(id, friendId); }
+    public void removeFriend(@PathVariable Long id, @PathVariable Long friendId) {
+        userService.removeFriend(id, friendId);
+    }
 
     @GetMapping("/{id}/friends")
-    public List<User> getFriends(@PathVariable Long id) { return userService.getFriends(id); }
+    public List<User> getFriends(@PathVariable Long id) {
+        return userService.getFriends(id);
+    }
 
     @GetMapping("/{id}/friends/common/{otherId}")
-    public List<User> getCommonFriends(@PathVariable Long id, @PathVariable Long otherId) { return userService.getCommonFriends(id, otherId); }
+    public List<User> getCommonFriends(@PathVariable Long id, @PathVariable Long otherId) {
+        return userService.getCommonFriends(id, otherId);
+    }
 }
