@@ -2,6 +2,7 @@ package ru.yandex.practicum.filmorate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 import ru.yandex.practicum.filmorate.controller.FilmController;
 import ru.yandex.practicum.filmorate.exception.ValidationException;
 import ru.yandex.practicum.filmorate.model.Film;
@@ -14,6 +15,7 @@ import ru.yandex.practicum.filmorate.storage.UserStorage;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 
 class FilmControllerTest {
 
@@ -23,7 +25,10 @@ class FilmControllerTest {
     void setUp() {
         FilmStorage filmStorage = new InMemoryFilmStorage();
         UserStorage userStorage = new InMemoryUserStorage();
-        FilmService filmService = new FilmService(filmStorage, userStorage);
+
+        JdbcTemplate jdbcTemplate = mock(JdbcTemplate.class);
+
+        FilmService filmService = new FilmService(filmStorage, userStorage, jdbcTemplate);
 
         controller = new FilmController(filmStorage, filmService);
     }

@@ -1,6 +1,7 @@
 package ru.yandex.practicum.filmorate.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.yandex.practicum.filmorate.model.User;
 import ru.yandex.practicum.filmorate.service.UserService;
@@ -10,16 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
+@RequiredArgsConstructor
 public class UserController {
-
     private final UserStorage userStorage;
     private final UserService userService;
-
-    @Autowired
-    public UserController(UserStorage userStorage, UserService userService) {
-        this.userStorage = userStorage;
-        this.userService = userService;
-    }
 
     @GetMapping
     public List<User> findAll() {
@@ -27,13 +22,13 @@ public class UserController {
     }
 
     @PostMapping
-    public User create(@RequestBody User user) {
-        return userStorage.create(user);
+    public User create(@Valid @RequestBody User user) {
+        return userService.create(user);
     }
 
     @PutMapping
-    public User update(@RequestBody User user) {
-        return userStorage.update(user);
+    public User update(@Valid @RequestBody User user) {
+        return userService.update(user);
     }
 
     @GetMapping("/{id}")
